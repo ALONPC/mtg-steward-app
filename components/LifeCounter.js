@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Image, Button } from 'react-native-elements'
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const imageUrl = `https://picsum.photos/200/200/?image=421`
@@ -27,7 +27,6 @@ export default class LifeCounter extends Component {
 
         const { lifeTotal } = this.state
 
-        // const { lifeTotal } = this.props
         return (
             <View style={{
                 flex: 1,
@@ -37,37 +36,33 @@ export default class LifeCounter extends Component {
             }}>
 
                 <Card title={`${lifeTotal}`} titleStyle={{ fontSize: 40, color: lifeTotal > 0 ? "green" : "red" }}>
-                    <View style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-evenly',
-                        alignItems: 'center',
-                        flexWrap: 'wrap',
-                        padding: 10
-                    }}>
+                    <View style={styles.buttonGrid}>
                         {AddLifeButton(1)}
                         {AddLifeButton(5)}
                     </View>
-
-                    <Image
-                        source={{ uri: imageUrl }}
-                        PlaceholderContent={<ActivityIndicator />}
-                    />
-                    <View style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-evenly',
-                        alignItems: 'center',
-                        flexWrap: 'wrap',
-                        padding: 10
-                    }}>
-
+                    <View style={{ flexDirection: 'row' }}>
+                        <Image
+                            source={{ uri: imageUrl }}
+                            PlaceholderContent={<ActivityIndicator />}
+                        />
+                    </View>
+                    <View style={styles.buttonGrid}>
                         {AddLifeButton(-1)}
                         {AddLifeButton(-5)}
                     </View>
-
-                    {/* <Text>This is your current life total</Text> */}
                 </Card>
             </View>
 
         )
     }
 }
+
+const styles = StyleSheet.create({
+    buttonGrid: {
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        padding: 10
+    },
+});

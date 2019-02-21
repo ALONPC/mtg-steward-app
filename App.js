@@ -38,6 +38,15 @@ const theme = {
 
 
 export default class App extends React.Component {
+  componentDidMount() {
+    Expo.ScreenOrientation.allowAsync(Expo.ScreenOrientation.Orientation.LANDSCAPE_RIGHT);
+  }
+
+  componentWillUnmount() {
+    Expo.ScreenOrientation.allowAsync(Expo.ScreenOrientation.Orientation.PORTRAIT);
+  }
+
+
   render() {
     return (
       <ThemeProvider theme={theme}>
@@ -47,3 +56,4 @@ export default class App extends React.Component {
     );
   }
 }
+
