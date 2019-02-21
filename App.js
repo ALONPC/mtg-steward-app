@@ -6,20 +6,19 @@ import LifeCounter from "./components/LifeCounter"
 const theme = {
   Button: {
     raised: true,
-    // buttonStyle: {
-    //   marginBottom: 10,
-    // }
+    buttonStyle: {
+      // marginBottom: 10,
+      width: 60,
+      height: 60
+    }
   },
   Card: {
-    titleStyle: {
-      fontSize: 40,
-    }
+
   },
   Image: {
     style: {
       width: 200,
       height: 200,
-      marginBottom: 10,
 
     },
     // resizeMode: 'cover'
