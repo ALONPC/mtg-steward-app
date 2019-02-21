@@ -5,8 +5,30 @@ import LifeCounter from "./components/LifeCounter"
 
 const theme = {
   Button: {
-    raised: true
+    raised: true,
+    // buttonStyle: {
+    //   marginBottom: 10,
+    // }
   },
+  Card: {
+    titleStyle: {
+      fontSize: 40,
+    }
+  },
+  Image: {
+    style: {
+      width: 200,
+      height: 200,
+      marginBottom: 10,
+
+    },
+    // resizeMode: 'cover'
+  },
+  // View: {
+  //   stlye: {
+  //     justifyContent: "center"
+  //   }
+  // },
   colors: {
     ...Platform.select({
       default: colors.platform.android,
@@ -15,32 +37,13 @@ const theme = {
   },
 };
 
-const AddLifeButton = lifeToAdd => <Button title={`+${lifeToAdd}`} lifeToAdd></Button>
 
 export default class App extends React.Component {
-
-  state = {
-    lifeTotal: 20
-  }
-
-  currentLifeTotal(life) {
-    return life;
-  }
-
-  handleLifeTotal = (lifeAdded) => {
-    this.setState({
-      lifeTotal: this.state.lifeTotal + lifeAdded
-    })
-  }
-
   render() {
-    const { lifeTotal } = this.state
     return (
       <ThemeProvider theme={theme}>
-        <LifeCounter lifeTotal={this.currentLifeTotal(lifeTotal)} />
-        {/* <Button title="+1" onPress={() => this.handleLifeTotal(1)}></Button>
-        <Button title="+5" onPress={() => this.handleLifeTotal(5)}></Button> */}
-        <AddLifeButton></AddLifeButton>
+        {/* <LifeCounter lifeTotal={this.currentLifeTotal(lifeTotal)} /> */}
+        <LifeCounter></LifeCounter>
       </ThemeProvider>
     );
   }
