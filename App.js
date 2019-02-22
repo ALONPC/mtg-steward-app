@@ -3,7 +3,6 @@ import { Platform, View, Text } from 'react-native';
 import { Button, ThemeProvider, colors, Avatar, Card } from 'react-native-elements'
 import LifeCounter from "./components/LifeCounter"
 import { setCustomText } from "react-native-global-props"
-import { Font } from "expo"
 
 const theme = {
   Button: {
@@ -22,11 +21,11 @@ const theme = {
     },
     // resizeMode: 'cover'
   },
-  Text: {
-    style: {
-      fontFamily: 'open-sans-bold'
-    }
-  },
+  // Text: {
+  //   style: {
+  //     fontFamily: 'open-sans-bold'
+  //   }
+  // },
   colors: {
     ...Platform.select({
       default: colors.platform.android,
@@ -35,20 +34,11 @@ const theme = {
   },
 };
 
-const customTextProps = {
-  style: {
-    fontFamily: 'Times New Roman'
-  }
-}
-
 export default class App extends React.Component {
 
 
   componentDidMount() {
     Expo.ScreenOrientation.allowAsync(Expo.ScreenOrientation.Orientation.LANDSCAPE_RIGHT);
-    Font.loadAsync({
-      'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
-    });
   }
 
   componentWillUnmount() {
