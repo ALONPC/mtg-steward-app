@@ -25,8 +25,6 @@ export default class LifeCounter extends Component {
     async componentDidMount() {
         await Font.loadAsync({
             'cinzel-bold': require("../assets/fonts/Cinzel-Bold.ttf")
-            // 'open-sans-bold': require('../assets/fonts/OpenSans-Bold.ttf'),
-            // "magic-medieval": require("../assets/fonts/MagicMedieval.ttf")
         })
         this.setState({ fontLoaded: true })
     }
@@ -63,7 +61,13 @@ export default class LifeCounter extends Component {
                         <Col>
                             <Grid>
                                 <Row>
-                                    <Col style={styles.mtgLifeButton}><Text style={styles.mtgPlayerName}>{playerName}</Text></Col>
+                                    <Col style={styles.mtgLifeButton}><Input inputStyle={{ fontFamily: 'cinzel-bold', textAlign: 'center' }} placeholder='Player One' leftIcon={
+                                        <Icon
+                                            name='skull'
+                                            size={24}
+                                            color='black'
+                                        />
+                                    }><Text style={styles.mtgPlayerName}></Text></Input></Col>
                                 </Row>
                                 <Row>
                                     <Col style={styles.mtgLifeButton}><Text style={[styles.mtgLifeCounter, { color: lifeTotal > 0 ? "green" : "red" }]}>{lifeTotal}</Text></Col>
@@ -130,9 +134,6 @@ const styles = StyleSheet.create({
     },
     mtgPlayerName: {
         fontSize: 40,
-        // fontWeight: 'bold',
-        // fontFamily: 'magic-medieval',
-        // fontFamily: 'open-sans-bold',
         fontFamily: 'cinzel-bold',
     }
 });

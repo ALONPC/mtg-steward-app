@@ -2,7 +2,6 @@ import React from 'react';
 import { Platform, View, Text } from 'react-native';
 import { Button, ThemeProvider, colors, Avatar, Card } from 'react-native-elements'
 import LifeCounter from "./components/LifeCounter"
-import { setCustomText } from "react-native-global-props"
 
 const theme = {
   Button: {
@@ -46,6 +45,7 @@ export default class App extends React.Component {
   }
 
   render() {
+
     return (
       <ThemeProvider theme={theme}>
         <LifeCounter></LifeCounter>
