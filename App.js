@@ -20,6 +20,9 @@ const theme = {
     },
     // resizeMode: 'cover'
   },
+  TextInput: {
+
+  },
   // Text: {
   //   style: {
   //     fontFamily: 'open-sans-bold'

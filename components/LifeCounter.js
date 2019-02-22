@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Card, Image, Button, Input } from 'react-native-elements'
-import { View, Text, ActivityIndicator, StyleSheet, ImageBackground } from 'react-native';
+import { Card, Image, Button, Input, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
+import { View, Text, ActivityIndicator, StyleSheet, ImageBackground, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { Font, AppLoading } from "expo"
@@ -20,6 +20,11 @@ export default class LifeCounter extends Component {
         this.setState({
             lifeTotal: this.state.lifeTotal + lifeToChange
         })
+    }
+
+    handleTextChange = (newPlayerName) => {
+        this.setState({ playerName: newPlayerName })
+        console.log(this.state.playerName)
     }
 
     async componentDidMount() {
@@ -47,13 +52,13 @@ export default class LifeCounter extends Component {
                         <Col>
                             <Grid>
                                 <Row>
-                                    <Col style={styles.mtgLifeButton}>{AddLifeButton(1)}</Col>
+                                    <Col style={styles.mtgGridElement}>{AddLifeButton(1)}</Col>
                                 </Row>
                                 <Row>
-                                    <Col style={styles.mtgPlusOneLife}><Text style={styles.mtgLifeToChange}>1</Text></Col>
+                                    <Col style={styles.mtgGridElement}><Text style={styles.mtgLifeToChange}>1</Text></Col>
                                 </Row>
                                 <Row>
-                                    <Col style={styles.mtgLifeButton}>{AddLifeButton(-1)}</Col>
+                                    <Col style={styles.mtgGridElement}>{AddLifeButton(-1)}</Col>
                                 </Row>
                             </Grid>
                         </Col>
@@ -61,19 +66,26 @@ export default class LifeCounter extends Component {
                         <Col>
                             <Grid>
                                 <Row>
-                                    <Col style={styles.mtgLifeButton}><Input inputStyle={{ fontFamily: 'cinzel-bold', textAlign: 'center' }} placeholder='Player One' leftIcon={
-                                        <Icon
-                                            name='skull'
-                                            size={24}
-                                            color='black'
+                                    {/* <Col style={styles.mtgGridElement}><Input underlineColorAndroid="transparent" inputStyle={{ textAlign: 'center' }} placeholder='Player One'><Text style={styles.mtgPlayerName}>{playerName}</Text></Input></Col> */}
+                                    <Col style={styles.mtgGridElement}>
+                                        <TextInput
+                                            style={styles.mtgPlayerName}
+                                            placeholder="Name"
+                                            onChangeText={(text) => this.handleTextChange(text)}
+                                            value={playerName}
+                                            // maxLength={10}
+                                            multiline
+                                            autoGrow
+                                            spellCheck={false}
+                                            underlineColorAndroid="transparent"
                                         />
-                                    }><Text style={styles.mtgPlayerName}></Text></Input></Col>
+                                    </Col>
                                 </Row>
                                 <Row>
-                                    <Col style={styles.mtgLifeButton}><Text style={[styles.mtgLifeCounter, { color: lifeTotal > 0 ? "green" : "red" }]}>{lifeTotal}</Text></Col>
+                                    <Col style={styles.mtgGridElement}><Text style={[styles.mtgLifeCounter, { color: lifeTotal > 0 ? "darkgreen" : "crimson" }]}>{lifeTotal}</Text></Col>
                                 </Row>
                                 <Row>
-                                    <Col style={styles.mtgLifeButton}><Text>{playerStatus}</Text></Col>
+                                    <Col style={styles.mtgGridElement}><Text>{playerStatus}</Text></Col>
                                 </Row>
                             </Grid>
                         </Col>
@@ -81,13 +93,13 @@ export default class LifeCounter extends Component {
                         <Col>
                             <Grid>
                                 <Row>
-                                    <Col style={styles.mtgLifeButton}>{AddLifeButton(5)}</Col>
+                                    <Col style={styles.mtgGridElement}>{AddLifeButton(5)}</Col>
                                 </Row>
                                 <Row>
-                                    <Col style={styles.mtgPlusFiveLife}><Text style={styles.mtgLifeToChange}>5</Text></Col>
+                                    <Col style={styles.mtgGridElement}><Text style={styles.mtgLifeToChange}>5</Text></Col>
                                 </Row>
                                 <Row>
-                                    <Col style={styles.mtgLifeButton}>{AddLifeButton(-5)}</Col>
+                                    <Col style={styles.mtgGridElement}>{AddLifeButton(-5)}</Col>
                                 </Row>
                             </Grid>
                         </Col>
@@ -103,37 +115,48 @@ const styles = StyleSheet.create({
     mtgBackground: {
 
     },
-    mtgLifeButton: {
+    mtgGridElement: {
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'center', borderColor: 'gray', borderWidth: 1
+
     },
+    // mtgGridElementPlayerName: {
+    //     flex: 2,
+    //     flexDirection: 'row',
+    //     justifyContent: 'center',
+    //     alignItems: 'center', borderColor: 'gray', borderWidth: 1
+
+    // },
     mtgLifeToChange: {
         fontSize: 100,
         color: 'white',
         fontFamily: 'cinzel-bold',
 
     },
-    mtgPlusOneLife: {
-        flex: 1.5,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    mtgPlusFiveLife: {
-        flex: 1.5,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
+    // mtgPlusOneLife: {
+    //     flex: 1,
+    //     flexDirection: 'row',
+    //     justifyContent: 'center',
+    //     alignItems: 'center',
+    // },
+    // mtgPlusFiveLife: {
+    //     flex: 1,
+    //     flexDirection: 'row',
+    //     justifyContent: 'center',
+    //     alignItems: 'center',
+    // },
     mtgLifeCounter: {
         fontSize: 150,
         fontFamily: 'cinzel-bold',
 
     },
     mtgPlayerName: {
-        fontSize: 40,
+        textAlign: 'center',
+        fontSize: 30,
         fontFamily: 'cinzel-bold',
+        width: '100%',
+        // borderColor: 'gray', borderWidth: 1
     }
 });
