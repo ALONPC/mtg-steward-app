@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Image, Button, Input, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
+import { Card, Image, Button, Input, FormLabel, FormInput, FormValidationMessage, Slider } from 'react-native-elements'
 import { View, Text, ActivityIndicator, StyleSheet, ImageBackground, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Col, Row, Grid } from "react-native-easy-grid";
@@ -11,7 +11,7 @@ export default class LifeCounter extends Component {
 
     state = {
         lifeTotal: 20,
-        playerName: 'Player 1',
+        playerName: 'Your name, Planeswalker',
         // playerStatus: <Icon name="skull" size={100} color="white" />
         playerStatus: undefined,
     }
@@ -27,6 +27,11 @@ export default class LifeCounter extends Component {
         console.log(this.state.playerName)
     }
 
+    handleSlider = (value) => {
+        this.setState({ value })
+        console.log(this.state.value);
+    }
+
     async componentDidMount() {
         await Font.loadAsync({
             'cinzel-bold': require("../assets/fonts/Cinzel-Bold.ttf")
@@ -36,8 +41,8 @@ export default class LifeCounter extends Component {
 
     render() {
         const AddLifeButton = (lifeToChange) => lifeToChange > 0 ?
-            (<Icon raised name="menu-up" size={100} color='white' onPress={() => this.handleLifeTotal(lifeToChange)}></Icon>)
-            : (<Icon raised name="menu-down" size={100} color='white' onPress={() => this.handleLifeTotal(lifeToChange)}></Icon>)
+            (<Icon raised name="menu-up" size={100} color='#e3e3e3' onPress={() => this.handleLifeTotal(lifeToChange)}></Icon>)
+            : (<Icon raised name="menu-down" size={100} color='#e3e3e3' onPress={() => this.handleLifeTotal(lifeToChange)}></Icon>)
 
         const { lifeTotal, playerName, playerStatus } = this.state
 
@@ -70,22 +75,29 @@ export default class LifeCounter extends Component {
                                     <Col style={styles.mtgGridElement}>
                                         <TextInput
                                             style={styles.mtgPlayerName}
-                                            placeholder="Name"
+                                            placeholder="Your name, Planeswalker"
                                             onChangeText={(text) => this.handleTextChange(text)}
                                             value={playerName}
                                             // maxLength={10}
                                             multiline
                                             autoGrow
+                                            selectTextOnFocus
                                             spellCheck={false}
                                             underlineColorAndroid="transparent"
+                                            selectionColor='transparent'
                                         />
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col style={styles.mtgGridElement}><Text style={[styles.mtgLifeCounter, { color: lifeTotal > 0 ? "darkgreen" : "crimson" }]}>{lifeTotal}</Text></Col>
+                                    <Col style={styles.mtgGridElement}>
+                                        <Text style={[styles.mtgLifeCounter, { color: lifeTotal > 0 ? "#017201" : "crimson" }]}>{lifeTotal}</Text>
+                                    </Col>
                                 </Row>
                                 <Row>
                                     <Col style={styles.mtgGridElement}><Text>{playerStatus}</Text></Col>
+                                    <Col style={styles.mtgGridElement}>
+
+                                    </Col>
                                 </Row>
                             </Grid>
                         </Col>
@@ -96,7 +108,9 @@ export default class LifeCounter extends Component {
                                     <Col style={styles.mtgGridElement}>{AddLifeButton(5)}</Col>
                                 </Row>
                                 <Row>
-                                    <Col style={styles.mtgGridElement}><Text style={styles.mtgLifeToChange}>5</Text></Col>
+                                    <Col style={styles.mtgGridElement}>
+                                        <Col style={styles.mtgGridElement}><Text style={styles.mtgLifeToChange}>5</Text></Col>
+                                    </Col>
                                 </Row>
                                 <Row>
                                     <Col style={styles.mtgGridElement}>{AddLifeButton(-5)}</Col>
@@ -119,44 +133,28 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center', borderColor: 'gray', borderWidth: 1
+        alignItems: 'center',
+        // borderColor: 'gray', borderWidth: 1
 
     },
-    // mtgGridElementPlayerName: {
-    //     flex: 2,
-    //     flexDirection: 'row',
-    //     justifyContent: 'center',
-    //     alignItems: 'center', borderColor: 'gray', borderWidth: 1
 
-    // },
     mtgLifeToChange: {
         fontSize: 100,
-        color: 'white',
+        color: '#e3e3e3',
         fontFamily: 'cinzel-bold',
-
     },
-    // mtgPlusOneLife: {
-    //     flex: 1,
-    //     flexDirection: 'row',
-    //     justifyContent: 'center',
-    //     alignItems: 'center',
-    // },
-    // mtgPlusFiveLife: {
-    //     flex: 1,
-    //     flexDirection: 'row',
-    //     justifyContent: 'center',
-    //     alignItems: 'center',
-    // },
+
     mtgLifeCounter: {
         fontSize: 150,
         fontFamily: 'cinzel-bold',
-
     },
     mtgPlayerName: {
         textAlign: 'center',
         fontSize: 30,
         fontFamily: 'cinzel-bold',
         width: '100%',
+        color: '#e3e3e3',
+
         // borderColor: 'gray', borderWidth: 1
     }
 });
