@@ -41,7 +41,7 @@ export default class LifeCounter extends Component {
     }
 
     handleLifeReset = () => {
-        this.setState(() => ({
+        this.setState(({
             lifeTotal: this.state.startingLifeTotal
         }), () => this.handlePlayerStatus(this.state.lifeTotal))
     }
