@@ -63,8 +63,8 @@ export default class LifeCounter extends Component {
     }
 
     handleTextChange = (newPlayerName) => {
-        this.setState({ playerName: newPlayerName })
-        console.log(this.state.playerName)
+        this.setState({ playerName: newPlayerName }, () => { console.log(this.state.playerName) })
+
     }
 
     handleSlider = (value) => {
