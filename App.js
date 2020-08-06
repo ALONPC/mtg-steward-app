@@ -1,33 +1,24 @@
-import React from 'react';
-import { Platform, View, Text } from 'react-native';
-import { Button, ThemeProvider, colors, Avatar, Card } from 'react-native-elements'
-import LifeCounter from "./components/LifeCounter"
+import React from "react";
+import { Platform } from "react-native";
+import { ThemeProvider, colors } from "react-native-elements";
+import LifeCounter from "./components/LifeCounter";
+import * as ScreenOrientation from "expo-screen-orientation";
 
 const theme = {
   Button: {
     raised: true,
     buttonStyle: {
-      // marginBottom: 10,
       width: 60,
-      height: 60
-    }
+      height: 60,
+    },
   },
   Image: {
     style: {
       width: 200,
       height: 200,
-
     },
-    // resizeMode: 'cover'
   },
-  TextInput: {
-
-  },
-  // Text: {
-  //   style: {
-  //     fontFamily: 'open-sans-bold'
-  //   }
-  // },
+  TextInput: {},
   colors: {
     ...Platform.select({
       default: colors.platform.android,
@@ -37,18 +28,13 @@ const theme = {
 };
 
 export default class App extends React.Component {
-
-
   componentDidMount() {
-    Expo.ScreenOrientation.allowAsync(Expo.ScreenOrientation.Orientation.LANDSCAPE_RIGHT);
-  }
-
-  componentWillUnmount() {
-    Expo.ScreenOrientation.allowAsync(Expo.ScreenOrientation.Orientation.PORTRAIT);
+    ScreenOrientation.lockAsync(
+      ScreenOrientation.OrientationLock.LANDSCAPE_RIGHT
+    );
   }
 
   render() {
-
     return (
       <ThemeProvider theme={theme}>
         <LifeCounter></LifeCounter>
@@ -56,4 +42,3 @@ export default class App extends React.Component {
     );
   }
 }
-
